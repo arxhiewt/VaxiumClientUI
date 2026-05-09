@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vaxium Client</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -16,335 +17,525 @@
 }
 
 body{
-    height:100vh;
+    background:#0a0c10;
     overflow:hidden;
-    background:
-    radial-gradient(circle at top left,#7122ff55,transparent 35%),
-    radial-gradient(circle at bottom right,#00d0ff44,transparent 35%),
-    #07070b;
-    color:white;
+    height:100vh;
 }
 
-.bg-grid{
+.bg{
     position:fixed;
     inset:0;
-    background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
-    background-size:40px 40px;
-    mask-image:radial-gradient(circle at center,black 40%,transparent 100%);
+    background:
+    radial-gradient(circle at top left,#00ff6a22,transparent 25%),
+    radial-gradient(circle at bottom right,#009dff22,transparent 25%),
+    #090b0f;
 }
 
-.app{
-    display:flex;
-    height:100vh;
-    position:relative;
-    z-index:2;
-}
-
-.sidebar{
-    width:260px;
-    background:rgba(255,255,255,0.04);
-    border-right:1px solid rgba(255,255,255,0.08);
-    backdrop-filter:blur(20px);
-    padding:25px;
-}
-
-.logo{
-    font-size:32px;
-    font-weight:800;
-    background:linear-gradient(90deg,#7a5cff,#00cfff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    margin-bottom:40px;
-}
-
-.nav{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-.nav button{
-    border:none;
-    outline:none;
-    padding:16px;
-    border-radius:16px;
-    background:rgba(255,255,255,0.03);
-    color:white;
-    text-align:left;
-    cursor:pointer;
-    transition:0.25s;
-    font-size:15px;
-    font-weight:600;
-}
-
-.nav button:hover{
-    background:linear-gradient(90deg,#6f42ff,#00cfff);
-    transform:translateX(4px);
-    box-shadow:0 0 25px #7d5cff66;
-}
-
-.main{
-    flex:1;
-    padding:30px;
-    overflow:auto;
+.window{
+    position:absolute;
+    width:720px;
+    height:520px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:18px;
+    background:rgba(17,20,27,0.94);
+    border:1px solid rgba(255,255,255,0.06);
+    backdrop-filter:blur(18px);
+    box-shadow:
+    0 25px 60px rgba(0,0,0,0.6),
+    0 0 40px rgba(0,255,100,0.08);
+    overflow:hidden;
+    resize:both;
+    min-width:650px;
+    min-height:450px;
 }
 
 .topbar{
+    height:46px;
+    background:rgba(255,255,255,0.03);
+    border-bottom:1px solid rgba(255,255,255,0.05);
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-bottom:30px;
+    justify-content:space-between;
+    padding:0 16px;
+    cursor:move;
+    user-select:none;
 }
 
-.search{
-    width:320px;
-    padding:14px 18px;
-    border:none;
-    outline:none;
-    border-radius:16px;
-    background:rgba(255,255,255,0.05);
+.logo{
     color:white;
-    font-size:14px;
+    font-weight:800;
+    letter-spacing:1px;
+    font-size:15px;
+}
+
+.logo span{
+    color:#00ff6a;
 }
 
 .status{
-    padding:12px 18px;
+    display:flex;
+    gap:8px;
+}
+
+.dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:#00ff6a;
+    box-shadow:0 0 12px #00ff6a;
+}
+
+.main{
+    display:flex;
+    height:calc(100% - 46px);
+}
+
+.sidebar{
+    width:190px;
+    border-right:1px solid rgba(255,255,255,0.05);
+    padding:14px;
+}
+
+.category{
+    padding:12px;
+    border-radius:12px;
+    color:#c7cad1;
+    margin-bottom:8px;
+    transition:.18s;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.category:hover{
+    background:rgba(255,255,255,0.04);
+}
+
+.category.active{
+    background:#00ff6a18;
+    color:#00ff6a;
+    border:1px solid #00ff6a33;
+}
+
+.content{
+    flex:1;
+    padding:16px;
+    overflow:auto;
+}
+
+.module{
+    background:#10141b;
+    border:1px solid rgba(255,255,255,0.05);
     border-radius:14px;
-    background:linear-gradient(90deg,#14ff72,#0ac95a);
-    color:black;
-    font-weight:700;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-    gap:22px;
-}
-
-.card{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:26px;
-    padding:22px;
-    backdrop-filter:blur(20px);
-    transition:0.3s;
-    position:relative;
+    margin-bottom:12px;
     overflow:hidden;
 }
 
-.card::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:linear-gradient(135deg,#7b5cff22,#00d0ff22);
-    opacity:0;
-    transition:0.3s;
+.module-header{
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
 }
 
-.card:hover::before{
-    opacity:1;
+.left{
+    display:flex;
+    flex-direction:column;
 }
 
-.card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 50px rgba(0,0,0,0.45);
+.title{
+    color:white;
+    font-weight:700;
+    font-size:15px;
 }
 
-.card h2{
-    font-size:20px;
-    margin-bottom:12px;
+.subtitle{
+    color:#7d8593;
+    font-size:12px;
+    margin-top:2px;
 }
 
-.desc{
-    color:#b8b8c5;
-    font-size:14px;
-    line-height:1.5;
-    margin-bottom:18px;
+.right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.keybind{
+    background:#171d26;
+    color:#8e97a7;
+    padding:7px 10px;
+    border-radius:9px;
+    font-size:12px;
+    border:1px solid rgba(255,255,255,0.04);
 }
 
 .toggle{
-    width:70px;
-    height:36px;
+    width:50px;
+    height:27px;
     border-radius:999px;
-    background:#222;
+    background:#222934;
     position:relative;
     cursor:pointer;
-    transition:0.3s;
+    transition:.22s;
 }
 
 .toggle::after{
     content:'';
-    position:absolute;
-    width:28px;
-    height:28px;
-    background:white;
+    width:20px;
+    height:20px;
     border-radius:50%;
-    top:4px;
+    background:white;
+    position:absolute;
+    top:3.5px;
     left:4px;
-    transition:0.3s;
+    transition:.22s;
 }
 
 .toggle.active{
-    background:linear-gradient(90deg,#7a5cff,#00cfff);
-    box-shadow:0 0 20px #7a5cff88;
+    background:#00d65f;
+    box-shadow:0 0 18px rgba(0,255,100,0.5);
 }
 
 .toggle.active::after{
-    left:38px;
+    left:26px;
 }
 
-.footer{
-    margin-top:35px;
+.expand{
+    color:#6d7684;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.settings{
+    display:none;
+    border-top:1px solid rgba(255,255,255,0.05);
+    padding:18px;
+}
+
+.settings.open{
+    display:block;
+}
+
+.setting{
+    margin-bottom:18px;
+}
+
+.setting label{
+    color:#c9d0da;
+    display:block;
+    margin-bottom:8px;
+    font-size:13px;
+    font-weight:600;
+}
+
+select{
+    width:100%;
+    background:#171d26;
+    border:none;
+    outline:none;
+    padding:12px;
+    color:white;
+    border-radius:10px;
+}
+
+.slider-row{
     display:flex;
-    gap:20px;
-    flex-wrap:wrap;
+    justify-content:space-between;
+    margin-bottom:6px;
 }
 
-.stat{
-    flex:1;
-    min-width:180px;
-    background:rgba(255,255,255,0.04);
-    border-radius:22px;
-    padding:24px;
+.slider-name{
+    color:#cfd6df;
+    font-size:13px;
 }
 
-.stat h1{
-    font-size:36px;
-    margin-top:8px;
-    background:linear-gradient(90deg,#7a5cff,#00d0ff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+.slider-value{
+    color:#00ff6a;
+    font-size:13px;
 }
 
-.glow{
-    position:fixed;
-    width:500px;
-    height:500px;
-    background:#6f42ff;
-    filter:blur(160px);
-    opacity:0.12;
-    top:-200px;
-    right:-100px;
+input[type=range]{
+    width:100%;
+    appearance:none;
+    height:7px;
+    border-radius:999px;
+    background:#1b212b;
 }
 
-@media(max-width:900px){
-    .sidebar{
-        display:none;
-    }
-
-    .main{
-        padding:18px;
-    }
-
-    .topbar{
-        flex-direction:column;
-        gap:16px;
-        align-items:flex-start;
-    }
-
-    .search{
-        width:100%;
-    }
+input[type=range]::-webkit-slider-thumb{
+    appearance:none;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#00ff6a;
+    box-shadow:0 0 10px #00ff6a;
+    cursor:pointer;
 }
+
+.checkbox{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#151a22;
+    padding:12px;
+    border-radius:12px;
+}
+
+.checkbox span{
+    color:#d2d8e0;
+    font-size:13px;
+    font-weight:600;
+}
+
+.small-toggle{
+    width:42px;
+    height:22px;
+    background:#222934;
+    border-radius:999px;
+    position:relative;
+    cursor:pointer;
+}
+
+.small-toggle::after{
+    content:'';
+    width:16px;
+    height:16px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    top:3px;
+    left:3px;
+    transition:.2s;
+}
+
+.small-toggle.active{
+    background:#00d65f;
+}
+
+.small-toggle.active::after{
+    left:23px;
+}
+
+::-webkit-scrollbar{
+    width:6px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#1e2631;
+    border-radius:999px;
+}
+
 </style>
 </head>
 <body>
 
-<div class="bg-grid"></div>
-<div class="glow"></div>
+<div class="bg"></div>
 
-<div class="app">
+<div class="window" id="window">
 
-    <div class="sidebar">
-        <div class="logo">VAXIUM</div>
+    <div class="topbar" id="dragbar">
+        <div class="logo">VAXIUM <span>CLIENT</span></div>
 
-        <div class="nav">
-            <button>Dashboard</button>
-            <button>Combat</button>
-            <button>Movement</button>
-            <button>Training</button>
-            <button>Visuals</button>
-            <button>Profiles</button>
-            <button>Settings</button>
+        <div class="status">
+            <div class="dot"></div>
         </div>
     </div>
 
     <div class="main">
 
-        <div class="topbar">
-            <input class="search" placeholder="Search modules..." />
-            <div class="status">CONNECTED</div>
-        </div>
+        <div class="sidebar">
 
-        <div class="cards">
-
-            <div class="card">
-                <h2>Jump Reset Trainer</h2>
-                <div class="desc">
-                    Practice timing, combo resets, and PvP movement with visual feedback.
-                </div>
-                <div class="toggle active"></div>
-            </div>
-
-            <div class="card">
-                <h2>AI Battler</h2>
-                <div class="desc">
-                    Offline training simulator with adaptive combat patterns.
-                </div>
-                <div class="toggle"></div>
-            </div>
-
-            <div class="card">
-                <h2>Sword & SMP Kits</h2>
-                <div class="desc">
-                    Save and load custom layouts for different PvP styles.
-                </div>
-                <div class="toggle active"></div>
-            </div>
-
-            <div class="card">
-                <h2>Replay Analytics</h2>
-                <div class="desc">
-                    Analyze fights, clicks, movement, and combo consistency.
-                </div>
-                <div class="toggle"></div>
-            </div>
-
-            <div class="card">
-                <h2>HUD Designer</h2>
-                <div class="desc">
-                    Fully customizable overlays, gradients, blur panels, and widgets.
-                </div>
-                <div class="toggle active"></div>
-            </div>
-
-            <div class="card">
-                <h2>Performance</h2>
-                <div class="desc">
-                    FPS boost profiles, optimization presets, and render tuning.
-                </div>
-                <div class="toggle"></div>
-            </div>
+            <div class="category active">Combat</div>
+            <div class="category">Player</div>
+            <div class="category">Movement</div>
+            <div class="category">Visuals</div>
+            <div class="category">Utility</div>
+            <div class="category">Configs</div>
 
         </div>
 
-        <div class="footer">
+        <div class="content">
 
-            <div class="stat">
-                <div>FPS</div>
-                <h1>642</h1>
+            <!-- AI BATTLER -->
+
+            <div class="module">
+
+                <div class="module-header">
+
+                    <div class="left">
+                        <div class="title">AI-Battler</div>
+                        <div class="subtitle">Adaptive PvP behaviour</div>
+                    </div>
+
+                    <div class="right">
+                        <div class="keybind">RSHIFT</div>
+                        <div class="toggle active"></div>
+                        <div class="expand">▶</div>
+                    </div>
+
+                </div>
+
+                <div class="settings">
+
+                    <div class="setting">
+                        <label>Gamemode</label>
+
+                        <select>
+                            <option>Sword</option>
+                            <option>SMP</option>
+                        </select>
+                    </div>
+
+                    <div class="setting">
+                        <div class="slider-row">
+                            <div class="slider-name">Prediction</div>
+                            <div class="slider-value">78%</div>
+                        </div>
+
+                        <input type="range" value="78">
+                    </div>
+
+                    <div class="setting">
+                        <div class="slider-row">
+                            <div class="slider-name">Gamesense</div>
+                            <div class="slider-value">64%</div>
+                        </div>
+
+                        <input type="range" value="64">
+                    </div>
+
+                    <div class="checkbox">
+                        <span>Blatant</span>
+                        <div class="small-toggle"></div>
+                    </div>
+
+                    <br>
+
+                    <div class="setting">
+                        <div class="slider-row">
+                            <div class="slider-name">Hit Chance</div>
+                            <div class="slider-value">92%</div>
+                        </div>
+
+                        <input type="range" value="92">
+                    </div>
+
+                    <div class="setting">
+                        <div class="slider-row">
+                            <div class="slider-name">Pot Chance</div>
+                            <div class="slider-value">65%</div>
+                        </div>
+
+                        <input type="range" value="65">
+                    </div>
+
+                    <div class="setting">
+                        <div class="slider-row">
+                            <div class="slider-name">Gap Chance</div>
+                            <div class="slider-value">48%</div>
+                        </div>
+
+                        <input type="range" value="48">
+                    </div>
+
+                    <div class="setting">
+                        <div class="slider-row">
+                            <div class="slider-name">Jumpreset Chance</div>
+                            <div class="slider-value">74%</div>
+                        </div>
+
+                        <input type="range" value="74">
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="stat">
-                <div>Ping</div>
-                <h1>18ms</h1>
+            <!-- TRIGGERBOT -->
+
+            <div class="module">
+
+                <div class="module-header">
+
+                    <div class="left">
+                        <div class="title">Triggerbot</div>
+                        <div class="subtitle">Automatic attack logic</div>
+                    </div>
+
+                    <div class="right">
+                        <div class="keybind">G</div>
+                        <div class="toggle"></div>
+                        <div class="expand">▶</div>
+                    </div>
+
+                </div>
+
+                <div class="settings">
+
+                    <div class="setting">
+
+                        <div class="slider-row">
+                            <div class="slider-name">Reach</div>
+                            <div class="slider-value">3.1 blocks</div>
+                        </div>
+
+                        <input type="range" min="0.5" max="7" step="0.1" value="3.1">
+
+                    </div>
+
+                    <div class="setting">
+
+                        <div class="slider-row">
+                            <div class="slider-name">Attack Cooldown</div>
+                            <div class="slider-value">0.4s</div>
+                        </div>
+
+                        <input type="range" min="0" max="20" step="0.1" value="0.4">
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="stat">
-                <div>CPS</div>
-                <h1>13.2</h1>
+            <!-- JUMPRESET -->
+
+            <div class="module">
+
+                <div class="module-header">
+
+                    <div class="left">
+                        <div class="title">Jumpreset</div>
+                        <div class="subtitle">Movement timing assistant</div>
+                    </div>
+
+                    <div class="right">
+                        <div class="keybind">V</div>
+                        <div class="toggle active"></div>
+                        <div class="expand">▶</div>
+                    </div>
+
+                </div>
+
+                <div class="settings">
+
+                    <div class="setting">
+
+                        <div class="slider-row">
+                            <div class="slider-name">Reset Accuracy</div>
+                            <div class="slider-value">82%</div>
+                        </div>
+
+                        <input type="range" value="82">
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
@@ -354,11 +545,66 @@ body{
 </div>
 
 <script>
+
 document.querySelectorAll('.toggle').forEach(toggle=>{
-    toggle.addEventListener('click',()=>{
+    toggle.onclick=()=>{
         toggle.classList.toggle('active')
-    })
+    }
 })
+
+document.querySelectorAll('.small-toggle').forEach(toggle=>{
+    toggle.onclick=()=>{
+        toggle.classList.toggle('active')
+    }
+})
+
+document.querySelectorAll('.expand').forEach(expand=>{
+
+    expand.onclick=()=>{
+
+        const settings=expand.parentElement.parentElement.parentElement.querySelector('.settings')
+
+        settings.classList.toggle('open')
+
+        expand.innerHTML=settings.classList.contains('open')
+        ? '▼'
+        : '▶'
+    }
+
+})
+
+const windowEl=document.getElementById('window')
+const dragbar=document.getElementById('dragbar')
+
+let offsetX=0
+let offsetY=0
+let dragging=false
+
+dragbar.addEventListener('mousedown',(e)=>{
+
+    dragging=true
+
+    offsetX=e.clientX-windowEl.offsetLeft
+    offsetY=e.clientY-windowEl.offsetTop
+
+})
+
+document.addEventListener('mousemove',(e)=>{
+
+    if(!dragging)return
+
+    windowEl.style.left=e.clientX-offsetX+'px'
+    windowEl.style.top=e.clientY-offsetY+'px'
+    windowEl.style.transform='none'
+
+})
+
+document.addEventListener('mouseup',()=>{
+
+    dragging=false
+
+})
+
 </script>
 
 </body>
