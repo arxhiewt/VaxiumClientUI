@@ -1,3 +1,6 @@
+```html
+<!-- REPLACE YOUR ENTIRE OLD HTML WITH THIS UPDATED VERSION -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,323 +13,347 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
 }
 
 body{
-    background:#0a0c10;
-    overflow:hidden;
-    height:100vh;
+background:#090b10;
+height:100vh;
+overflow:hidden;
 }
 
 .bg{
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at top left,#00ff6a22,transparent 25%),
-    radial-gradient(circle at bottom right,#009dff22,transparent 25%),
-    #090b0f;
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#00ff8820,transparent 25%),
+radial-gradient(circle at bottom right,#0088ff20,transparent 25%),
+#090b10;
 }
 
 .window{
-    position:absolute;
-    width:720px;
-    height:520px;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    border-radius:18px;
-    background:rgba(17,20,27,0.94);
-    border:1px solid rgba(255,255,255,0.06);
-    backdrop-filter:blur(18px);
-    box-shadow:
-    0 25px 60px rgba(0,0,0,0.6),
-    0 0 40px rgba(0,255,100,0.08);
-    overflow:hidden;
-    resize:both;
-    min-width:650px;
-    min-height:450px;
+position:absolute;
+width:760px;
+height:560px;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+background:rgba(13,16,22,0.96);
+border:1px solid rgba(255,255,255,0.05);
+border-radius:18px;
+overflow:hidden;
+resize:both;
+min-width:700px;
+min-height:500px;
+box-shadow:
+0 25px 80px rgba(0,0,0,0.6),
+0 0 40px rgba(0,255,100,0.08);
+backdrop-filter:blur(20px);
 }
 
 .topbar{
-    height:46px;
-    background:rgba(255,255,255,0.03);
-    border-bottom:1px solid rgba(255,255,255,0.05);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 16px;
-    cursor:move;
-    user-select:none;
+height:46px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 16px;
+background:rgba(255,255,255,0.03);
+border-bottom:1px solid rgba(255,255,255,0.05);
+cursor:move;
+user-select:none;
 }
 
 .logo{
-    color:white;
-    font-weight:800;
-    letter-spacing:1px;
-    font-size:15px;
+font-weight:800;
+font-size:15px;
+color:white;
 }
 
 .logo span{
-    color:#00ff6a;
+color:#00ff73;
 }
 
-.status{
-    display:flex;
-    gap:8px;
+.stats{
+display:flex;
+gap:16px;
 }
 
-.dot{
-    width:11px;
-    height:11px;
-    border-radius:50%;
-    background:#00ff6a;
-    box-shadow:0 0 12px #00ff6a;
+.live{
+color:#aeb7c7;
+font-size:13px;
+font-weight:600;
+}
+
+.live span{
+color:#00ff73;
 }
 
 .main{
-    display:flex;
-    height:calc(100% - 46px);
+display:flex;
+height:calc(100% - 46px);
 }
 
 .sidebar{
-    width:190px;
-    border-right:1px solid rgba(255,255,255,0.05);
-    padding:14px;
+width:190px;
+border-right:1px solid rgba(255,255,255,0.05);
+padding:14px;
 }
 
-.category{
-    padding:12px;
-    border-radius:12px;
-    color:#c7cad1;
-    margin-bottom:8px;
-    transition:.18s;
-    font-size:14px;
-    font-weight:600;
-    cursor:pointer;
+.tab{
+padding:13px;
+border-radius:12px;
+margin-bottom:8px;
+color:#9aa3b2;
+font-weight:600;
+font-size:14px;
+cursor:pointer;
+transition:.18s;
 }
 
-.category:hover{
-    background:rgba(255,255,255,0.04);
+.tab:hover{
+background:rgba(255,255,255,0.03);
 }
 
-.category.active{
-    background:#00ff6a18;
-    color:#00ff6a;
-    border:1px solid #00ff6a33;
+.tab.active{
+background:#00ff7315;
+border:1px solid #00ff7330;
+color:#00ff73;
 }
 
 .content{
-    flex:1;
-    padding:16px;
-    overflow:auto;
+flex:1;
+padding:16px;
+overflow:auto;
+}
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
 }
 
 .module{
-    background:#10141b;
-    border:1px solid rgba(255,255,255,0.05);
-    border-radius:14px;
-    margin-bottom:12px;
-    overflow:hidden;
+background:#11161d;
+border-radius:15px;
+border:1px solid rgba(255,255,255,0.05);
+margin-bottom:14px;
+overflow:hidden;
 }
 
 .module-header{
-    height:58px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 18px;
-}
-
-.left{
-    display:flex;
-    flex-direction:column;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 18px;
 }
 
 .title{
-    color:white;
-    font-weight:700;
-    font-size:15px;
+color:white;
+font-weight:700;
+font-size:15px;
 }
 
 .subtitle{
-    color:#7d8593;
-    font-size:12px;
-    margin-top:2px;
+font-size:12px;
+color:#7d8694;
+margin-top:3px;
 }
 
 .right{
-    display:flex;
-    align-items:center;
-    gap:12px;
+display:flex;
+align-items:center;
+gap:12px;
 }
 
-.keybind{
-    background:#171d26;
-    color:#8e97a7;
-    padding:7px 10px;
-    border-radius:9px;
-    font-size:12px;
-    border:1px solid rgba(255,255,255,0.04);
-}
-
-.toggle{
-    width:50px;
-    height:27px;
-    border-radius:999px;
-    background:#222934;
-    position:relative;
-    cursor:pointer;
-    transition:.22s;
-}
-
-.toggle::after{
-    content:'';
-    width:20px;
-    height:20px;
-    border-radius:50%;
-    background:white;
-    position:absolute;
-    top:3.5px;
-    left:4px;
-    transition:.22s;
-}
-
-.toggle.active{
-    background:#00d65f;
-    box-shadow:0 0 18px rgba(0,255,100,0.5);
-}
-
-.toggle.active::after{
-    left:26px;
+.key{
+padding:7px 10px;
+background:#171d26;
+border-radius:8px;
+font-size:12px;
+color:#94a0b2;
 }
 
 .expand{
-    color:#6d7684;
-    font-size:14px;
-    cursor:pointer;
+color:#738094;
+cursor:pointer;
+}
+
+.toggle{
+width:50px;
+height:27px;
+border-radius:999px;
+background:#252d39;
+position:relative;
+cursor:pointer;
+transition:.2s;
+}
+
+.toggle::after{
+content:'';
+position:absolute;
+width:20px;
+height:20px;
+border-radius:50%;
+background:white;
+top:3.5px;
+left:4px;
+transition:.2s;
+}
+
+.toggle.active{
+background:#00d65f;
+box-shadow:0 0 16px rgba(0,255,100,0.5);
+}
+
+.toggle.active::after{
+left:26px;
 }
 
 .settings{
-    display:none;
-    border-top:1px solid rgba(255,255,255,0.05);
-    padding:18px;
+display:none;
+padding:18px;
+border-top:1px solid rgba(255,255,255,0.05);
 }
 
 .settings.open{
-    display:block;
+display:block;
 }
 
 .setting{
-    margin-bottom:18px;
+margin-bottom:18px;
 }
 
 .setting label{
-    color:#c9d0da;
-    display:block;
-    margin-bottom:8px;
-    font-size:13px;
-    font-weight:600;
+display:block;
+margin-bottom:8px;
+color:#cfd7e2;
+font-size:13px;
+font-weight:600;
 }
 
-select{
-    width:100%;
-    background:#171d26;
-    border:none;
-    outline:none;
-    padding:12px;
-    color:white;
-    border-radius:10px;
+.dropdown{
+background:#171d26;
+padding:12px;
+border-radius:10px;
+color:white;
+cursor:pointer;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.dropdown-menu{
+margin-top:8px;
+display:none;
+background:#171d26;
+border-radius:10px;
+overflow:hidden;
+}
+
+.dropdown-menu div{
+padding:12px;
+color:#cfd7e2;
+cursor:pointer;
+transition:.15s;
+}
+
+.dropdown-menu div:hover{
+background:#202938;
 }
 
 .slider-row{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:6px;
+display:flex;
+justify-content:space-between;
+margin-bottom:7px;
 }
 
 .slider-name{
-    color:#cfd6df;
-    font-size:13px;
+font-size:13px;
+color:#d5dbe4;
 }
 
 .slider-value{
-    color:#00ff6a;
-    font-size:13px;
+font-size:13px;
+color:#00ff73;
 }
 
-input[type=range]{
-    width:100%;
-    appearance:none;
-    height:7px;
-    border-radius:999px;
-    background:#1b212b;
+.slider{
+width:100%;
+appearance:none;
+height:7px;
+border-radius:999px;
+background:#1a2029;
+outline:none;
 }
 
-input[type=range]::-webkit-slider-thumb{
-    appearance:none;
-    width:16px;
-    height:16px;
-    border-radius:50%;
-    background:#00ff6a;
-    box-shadow:0 0 10px #00ff6a;
-    cursor:pointer;
+.slider::-webkit-slider-thumb{
+appearance:none;
+width:16px;
+height:16px;
+border-radius:50%;
+background:#00ff73;
+cursor:pointer;
+box-shadow:0 0 10px #00ff73;
 }
 
 .checkbox{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:#151a22;
-    padding:12px;
-    border-radius:12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+background:#151a22;
+border-radius:12px;
+margin-bottom:12px;
 }
 
 .checkbox span{
-    color:#d2d8e0;
-    font-size:13px;
-    font-weight:600;
+color:#d6dde7;
+font-size:13px;
+font-weight:600;
 }
 
 .small-toggle{
-    width:42px;
-    height:22px;
-    background:#222934;
-    border-radius:999px;
-    position:relative;
-    cursor:pointer;
+width:42px;
+height:22px;
+border-radius:999px;
+background:#252d39;
+position:relative;
+cursor:pointer;
 }
 
 .small-toggle::after{
-    content:'';
-    width:16px;
-    height:16px;
-    background:white;
-    border-radius:50%;
-    position:absolute;
-    top:3px;
-    left:3px;
-    transition:.2s;
+content:'';
+position:absolute;
+width:16px;
+height:16px;
+border-radius:50%;
+background:white;
+top:3px;
+left:3px;
+transition:.2s;
 }
 
 .small-toggle.active{
-    background:#00d65f;
+background:#00d65f;
 }
 
 .small-toggle.active::after{
-    left:23px;
+left:23px;
 }
 
 ::-webkit-scrollbar{
-    width:6px;
+width:6px;
 }
 
 ::-webkit-scrollbar-thumb{
-    background:#1e2631;
-    border-radius:999px;
+background:#1f2630;
+border-radius:999px;
 }
 
 </style>
@@ -337,271 +364,469 @@ input[type=range]::-webkit-slider-thumb{
 
 <div class="window" id="window">
 
-    <div class="topbar" id="dragbar">
-        <div class="logo">VAXIUM <span>CLIENT</span></div>
+<div class="topbar" id="dragbar">
 
-        <div class="status">
-            <div class="dot"></div>
-        </div>
-    </div>
+<div class="logo">
+VAXIUM <span>CLIENT</span>
+</div>
 
-    <div class="main">
+<div class="stats">
+<div class="live">FPS: <span id="fps">641</span></div>
+<div class="live">Ping: <span id="ping">18</span>ms</div>
+</div>
 
-        <div class="sidebar">
+</div>
 
-            <div class="category active">Combat</div>
-            <div class="category">Player</div>
-            <div class="category">Movement</div>
-            <div class="category">Visuals</div>
-            <div class="category">Utility</div>
-            <div class="category">Configs</div>
+<div class="main">
 
-        </div>
+<div class="sidebar">
 
-        <div class="content">
+<div class="tab active" data-page="combat">Combat</div>
+<div class="tab" data-page="movement">Movement</div>
+<div class="tab" data-page="visuals">Visuals</div>
+<div class="tab" data-page="player">Player</div>
+<div class="tab" data-page="utility">Utility</div>
+<div class="tab" data-page="configs">Configs</div>
 
-            <!-- AI BATTLER -->
+</div>
 
-            <div class="module">
+<div class="content">
 
-                <div class="module-header">
+<!-- COMBAT -->
 
-                    <div class="left">
-                        <div class="title">AI-Battler</div>
-                        <div class="subtitle">Adaptive PvP behaviour</div>
-                    </div>
+<div class="page active" id="combat">
 
-                    <div class="right">
-                        <div class="keybind">RSHIFT</div>
-                        <div class="toggle active"></div>
-                        <div class="expand">▶</div>
-                    </div>
+<!-- AI BATTLER -->
 
-                </div>
+<div class="module">
 
-                <div class="settings">
+<div class="module-header">
 
-                    <div class="setting">
-                        <label>Gamemode</label>
+<div>
+<div class="title">AI-Battler</div>
+<div class="subtitle">Adaptive PvP Behaviour</div>
+</div>
 
-                        <select>
-                            <option>Sword</option>
-                            <option>SMP</option>
-                        </select>
-                    </div>
+<div class="right">
+<div class="key">RSHIFT</div>
+<div class="toggle active"></div>
+<div class="expand">▶</div>
+</div>
 
-                    <div class="setting">
-                        <div class="slider-row">
-                            <div class="slider-name">Prediction</div>
-                            <div class="slider-value">78%</div>
-                        </div>
+</div>
 
-                        <input type="range" value="78">
-                    </div>
+<div class="settings">
 
-                    <div class="setting">
-                        <div class="slider-row">
-                            <div class="slider-name">Gamesense</div>
-                            <div class="slider-value">64%</div>
-                        </div>
+<div class="setting">
 
-                        <input type="range" value="64">
-                    </div>
+<label>Gamemode</label>
 
-                    <div class="checkbox">
-                        <span>Blatant</span>
-                        <div class="small-toggle"></div>
-                    </div>
+<div class="dropdown gamemode-dropdown">
+<span class="selected-mode">Sword</span>
+<span>▼</span>
+</div>
 
-                    <br>
+<div class="dropdown-menu gamemode-menu">
+<div data-mode="Sword">Sword</div>
+<div data-mode="SMP">SMP</div>
+</div>
 
-                    <div class="setting">
-                        <div class="slider-row">
-                            <div class="slider-name">Hit Chance</div>
-                            <div class="slider-value">92%</div>
-                        </div>
+</div>
 
-                        <input type="range" value="92">
-                    </div>
+<div class="checkbox">
+<span>Blatant</span>
+<div class="small-toggle"></div>
+</div>
 
-                    <div class="setting">
-                        <div class="slider-row">
-                            <div class="slider-name">Pot Chance</div>
-                            <div class="slider-value">65%</div>
-                        </div>
+<div class="checkbox">
+<span>Jumpreset</span>
+<div class="small-toggle active"></div>
+</div>
 
-                        <input type="range" value="65">
-                    </div>
+<div class="checkbox">
+<span>Auto Hit</span>
+<div class="small-toggle active"></div>
+</div>
 
-                    <div class="setting">
-                        <div class="slider-row">
-                            <div class="slider-name">Gap Chance</div>
-                            <div class="slider-value">48%</div>
-                        </div>
+<div class="smp-only" style="display:none;">
 
-                        <input type="range" value="48">
-                    </div>
+<div class="setting">
 
-                    <div class="setting">
-                        <div class="slider-row">
-                            <div class="slider-name">Jumpreset Chance</div>
-                            <div class="slider-value">74%</div>
-                        </div>
+<div class="slider-row">
+<div class="slider-name">Pot Chance</div>
+<div class="slider-value">65%</div>
+</div>
 
-                        <input type="range" value="74">
-                    </div>
+<input class="slider" type="range" min="0" max="100" value="65">
 
-                </div>
+</div>
 
-            </div>
+<div class="setting">
 
-            <!-- TRIGGERBOT -->
+<div class="slider-row">
+<div class="slider-name">Gap Chance</div>
+<div class="slider-value">41%</div>
+</div>
 
-            <div class="module">
+<input class="slider" type="range" min="0" max="100" value="41">
 
-                <div class="module-header">
+</div>
 
-                    <div class="left">
-                        <div class="title">Triggerbot</div>
-                        <div class="subtitle">Automatic attack logic</div>
-                    </div>
+</div>
 
-                    <div class="right">
-                        <div class="keybind">G</div>
-                        <div class="toggle"></div>
-                        <div class="expand">▶</div>
-                    </div>
+</div>
 
-                </div>
+</div>
 
-                <div class="settings">
+<!-- SHIELD DISABLER -->
 
-                    <div class="setting">
+<div class="module">
 
-                        <div class="slider-row">
-                            <div class="slider-name">Reach</div>
-                            <div class="slider-value">3.1 blocks</div>
-                        </div>
+<div class="module-header">
 
-                        <input type="range" min="0.5" max="7" step="0.1" value="3.1">
+<div>
+<div class="title">Shield Disabler</div>
+<div class="subtitle">Shield timing control</div>
+</div>
 
-                    </div>
+<div class="right">
+<div class="key">H</div>
+<div class="toggle"></div>
+<div class="expand">▶</div>
+</div>
 
-                    <div class="setting">
+</div>
 
-                        <div class="slider-row">
-                            <div class="slider-name">Attack Cooldown</div>
-                            <div class="slider-value">0.4s</div>
-                        </div>
+<div class="settings">
 
-                        <input type="range" min="0" max="20" step="0.1" value="0.4">
+<div class="setting">
 
-                    </div>
+<div class="slider-row">
+<div class="slider-name">Disable Cooldown</div>
+<div class="slider-value">0.7s</div>
+</div>
 
-                </div>
+<input class="slider" type="range" min="0" max="5" step="0.1" value="0.7">
 
-            </div>
+</div>
 
-            <!-- JUMPRESET -->
+<div class="setting">
 
-            <div class="module">
+<div class="slider-row">
+<div class="slider-name">Disable Chance</div>
+<div class="slider-value">84%</div>
+</div>
 
-                <div class="module-header">
+<input class="slider" type="range" min="0" max="100" value="84">
 
-                    <div class="left">
-                        <div class="title">Jumpreset</div>
-                        <div class="subtitle">Movement timing assistant</div>
-                    </div>
+</div>
 
-                    <div class="right">
-                        <div class="keybind">V</div>
-                        <div class="toggle active"></div>
-                        <div class="expand">▶</div>
-                    </div>
+<div class="setting">
 
-                </div>
+<label>Shield Disable Mode</label>
 
-                <div class="settings">
+<div class="dropdown">
+<span>When looking at player - ALL</span>
+<span>▼</span>
+</div>
 
-                    <div class="setting">
+</div>
 
-                        <div class="slider-row">
-                            <div class="slider-name">Reset Accuracy</div>
-                            <div class="slider-value">82%</div>
-                        </div>
+<div class="checkbox">
+<span>Auto Stun Slam</span>
+<div class="small-toggle active"></div>
+</div>
 
-                        <input type="range" value="82">
+<div class="checkbox">
+<span>Use Spear Reach For Stun Slam</span>
+<div class="small-toggle"></div>
+</div>
 
-                    </div>
+</div>
 
-                </div>
+</div>
 
-            </div>
+</div>
 
-        </div>
+<!-- MOVEMENT -->
 
-    </div>
+<div class="page" id="movement">
+
+<div class="module">
+<div class="module-header">
+
+<div>
+<div class="title">Jumpreset</div>
+<div class="subtitle">Movement timing assistance</div>
+</div>
+
+<div class="right">
+<div class="key">V</div>
+<div class="toggle active"></div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<!-- VISUALS -->
+
+<div class="page" id="visuals">
+
+<div class="module">
+<div class="module-header">
+
+<div>
+<div class="title">ESP</div>
+<div class="subtitle">Player highlighting visuals</div>
+</div>
+
+<div class="right">
+<div class="key">B</div>
+<div class="toggle"></div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<!-- PLAYER -->
+
+<div class="page" id="player">
+
+<div class="module">
+<div class="module-header">
+
+<div>
+<div class="title">Inventory Manager</div>
+<div class="subtitle">Inventory sorting utilities</div>
+</div>
+
+<div class="right">
+<div class="key">I</div>
+<div class="toggle"></div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<!-- UTILITY -->
+
+<div class="page" id="utility">
+
+<div class="module">
+<div class="module-header">
+
+<div>
+<div class="title">Auto GG</div>
+<div class="subtitle">Automatic chat messages</div>
+</div>
+
+<div class="right">
+<div class="key">N</div>
+<div class="toggle"></div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<!-- CONFIGS -->
+
+<div class="page" id="configs">
+
+<div class="module">
+<div class="module-header">
+
+<div>
+<div class="title">Config Manager</div>
+<div class="subtitle">Save and load presets</div>
+</div>
+
+<div class="right">
+<div class="key">P</div>
+<div class="toggle active"></div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
 
-document.querySelectorAll('.toggle').forEach(toggle=>{
-    toggle.onclick=()=>{
-        toggle.classList.toggle('active')
-    }
+/* FPS + PING */
+
+setInterval(()=>{
+
+document.getElementById('fps').innerText=
+Math.floor(580 + Math.random()*120)
+
+document.getElementById('ping').innerText=
+Math.floor(14 + Math.random()*12)
+
+},1200)
+
+/* TOGGLES */
+
+document.querySelectorAll('.toggle,.small-toggle').forEach(t=>{
+
+t.onclick=()=>{
+
+t.classList.toggle('active')
+
+}
+
 })
 
-document.querySelectorAll('.small-toggle').forEach(toggle=>{
-    toggle.onclick=()=>{
-        toggle.classList.toggle('active')
-    }
-})
+/* EXPANDS */
 
 document.querySelectorAll('.expand').forEach(expand=>{
 
-    expand.onclick=()=>{
+expand.onclick=()=>{
 
-        const settings=expand.parentElement.parentElement.parentElement.querySelector('.settings')
+const settings=
+expand.parentElement.parentElement.parentElement.querySelector('.settings')
 
-        settings.classList.toggle('open')
+settings.classList.toggle('open')
 
-        expand.innerHTML=settings.classList.contains('open')
-        ? '▼'
-        : '▶'
-    }
+expand.innerHTML=
+settings.classList.contains('open') ? '▼' : '▶'
+
+}
 
 })
 
-const windowEl=document.getElementById('window')
-const dragbar=document.getElementById('dragbar')
+/* SLIDERS */
 
-let offsetX=0
-let offsetY=0
+document.querySelectorAll('.slider').forEach(slider=>{
+
+const valueText=
+slider.parentElement.querySelector('.slider-value')
+
+const update=()=>{
+
+if(valueText.innerText.includes('%')){
+
+valueText.innerText=slider.value + '%'
+
+}else if(valueText.innerText.includes('s')){
+
+valueText.innerText=slider.value + 's'
+
+}else{
+
+valueText.innerText=slider.value
+
+}
+
+}
+
+slider.addEventListener('input',update)
+
+})
+
+/* DRAG */
+
+const win=document.getElementById('window')
+const drag=document.getElementById('dragbar')
+
+let dragX=0
+let dragY=0
 let dragging=false
 
-dragbar.addEventListener('mousedown',(e)=>{
+drag.onmousedown=(e)=>{
 
-    dragging=true
+dragging=true
 
-    offsetX=e.clientX-windowEl.offsetLeft
-    offsetY=e.clientY-windowEl.offsetTop
+dragX=e.clientX-win.offsetLeft
+dragY=e.clientY-win.offsetTop
+
+}
+
+document.onmousemove=(e)=>{
+
+if(!dragging)return
+
+win.style.left=(e.clientX-dragX)+'px'
+win.style.top=(e.clientY-dragY)+'px'
+win.style.transform='none'
+
+}
+
+document.onmouseup=()=>{
+
+dragging=false
+
+}
+
+/* TABS */
+
+document.querySelectorAll('.tab').forEach(tab=>{
+
+tab.onclick=()=>{
+
+document.querySelectorAll('.tab')
+.forEach(t=>t.classList.remove('active'))
+
+tab.classList.add('active')
+
+document.querySelectorAll('.page')
+.forEach(p=>p.classList.remove('active'))
+
+document.getElementById(tab.dataset.page)
+.classList.add('active')
+
+}
 
 })
 
-document.addEventListener('mousemove',(e)=>{
+/* GAMEMODE */
 
-    if(!dragging)return
+const modeDropdown=document.querySelector('.gamemode-dropdown')
+const modeMenu=document.querySelector('.gamemode-menu')
+const selected=document.querySelector('.selected-mode')
+const smpOnly=document.querySelector('.smp-only')
 
-    windowEl.style.left=e.clientX-offsetX+'px'
-    windowEl.style.top=e.clientY-offsetY+'px'
-    windowEl.style.transform='none'
+modeDropdown.onclick=()=>{
 
-})
+modeMenu.style.display=
+modeMenu.style.display==='block'
+? 'none'
+: 'block'
 
-document.addEventListener('mouseup',()=>{
+}
 
-    dragging=false
+document.querySelectorAll('.gamemode-menu div').forEach(option=>{
+
+option.onclick=()=>{
+
+selected.innerText=option.dataset.mode
+
+modeMenu.style.display='none'
+
+if(option.dataset.mode==='SMP'){
+
+smpOnly.style.display='block'
+
+}else{
+
+smpOnly.style.display='none'
+
+}
+
+}
 
 })
 
@@ -609,3 +834,4 @@ document.addEventListener('mouseup',()=>{
 
 </body>
 </html>
+```
